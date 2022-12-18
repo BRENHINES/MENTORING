@@ -1,17 +1,47 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom';
+import { createBrowserRouter,createRoutesFromElements, RouterProvider, Route} from "react-router-dom/dist/index";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import "./fontawesome/css/all.min.css";
+import "./assets/styles/tailwind.css";
+
+
+// layouts
+import Dashboard from "./views/admin/Dashboard";
+import MentorDash from './views/admin/MentorDash';
+// views without layouts
+
+
+import Landing from "./views/Landing.js";
+
+// Authentification
+import Login from "./views/auth/Login.js";
+import Register from "./views/auth/Register.js";
+
+import Profile from './views/Profile';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/" element={<Landing />} />
+      {/* add routes for authentification */}
+      <Route path="/auth/login" element={<Login />} />
+      <Route path="/auth/register" element={<Register />} />
+      {/* <Route path="/admin" element={<Admin />}> */}
+      <Route path="/admin/dashboard" element={<Dashboard />} />
+      <Route path="/admin/MentorDash" element={<MentorDash />} /> 
+
+      <Route path="/Profile" element={<Profile />} /> 
+    </Route>
+  
+  )
+);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
